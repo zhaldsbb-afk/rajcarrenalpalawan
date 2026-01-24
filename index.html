@@ -1,1 +1,950 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raj Car Rental Palawan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="./logo.jpg">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
+        
+        :root {
+            --primary-gold: #D4AF37;
+            --primary-gold-dark: #B8962E;
+            --soft-ivory: #FAFAF7;
+            --charcoal-black: #2B2B2B;
+            --dark-gray: #4A4A4A;
+            --warm-beige: #EFE6D8;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--soft-ivory);
+            color: var(--charcoal-black);
+        }
+        
+        .luxury-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .bg-luxury-beige {
+            background-color: var(--warm-beige);
+        }
+        
+        .text-gold {
+            color: var(--primary-gold);
+        }
+        
+        .bg-gold {
+            background-color: var(--primary-gold);
+        }
+        
+        .border-gold {
+            border-color: var(--primary-gold);
+        }
+        
+        .bg-dark-gray {
+            background-color: var(--dark-gray);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-gold);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-gold);
+            color: white;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-gold);
+        }
+        
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: var(--primary-gold);
+            transform: scale(1.2);
+        }
+        
+        .icon-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .icon-circle:hover {
+            transform: translateY(-3px);
+        }
+        
+        .baby-seat-card {
+            background: linear-gradient(135deg, var(--warm-beige) 0%, #f5eedf 100%);
+            border-left: 5px solid var(--primary-gold);
+        }
+        
+        .modal-overlay {
+            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .whatsapp-gradient {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+        
+        .whatsapp-gradient:hover {
+            background: linear-gradient(135deg, #3de383 0%, #1da88f 100%);
+        }
+        
+        .sms-gradient {
+            background: linear-gradient(135deg, #34b7f1 0%, #0099cc 100%);
+        }
+        
+        .sms-gradient:hover {
+            background: linear-gradient(135deg, #4cc7f4 0%, #1aa3d6 100%);
+        }
+        
+        .logo-container {
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--primary-gold-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .car-image {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+            border-radius: 8px;
+            background-color: #f3f4f6;
+        }
+        
+        .logo-img {
+            max-height: 80px;
+            width: auto;
+        }
+        
+        .fallback-image {
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container mx-auto p-4 pt-6 md:p-6 lg:p-8" 
+         x-data="{
+            business: {
+                name: 'Raj Car Rental Palawan',
+                tagline: 'Premium Car Rental Services in Puerto Princesa',
+                address: 'Malvar Street, Puerto Princesa 5300',
+                phone: '09488697249',
+                whatsapp: 'https://wa.me/639488697249',
+                email: 'rajcarrentalservices@gmail.com',
+                facebook: 'https://www.facebook.com/profile.php?id=61562249703903',
+                instagram: 'https://www.instagram.com/rajcarrentalpalawan',
+                officeHours: '24/7 Service Available',
+                dtiPermit: 'DTI Registered',
+                birRegistered: 'BIR Registered',
+                businessPermit: 'Mayor\'s Permit/Business Permit'
+            },
+            currentImage: 0,
+            images: [
+                './fortuner.jpg',
+                './rangersport.jpg',
+                './grandia.jpg',
+                './innova.jpg'
+            ],
+            availableCars: [
+                { 
+                    id: 1, 
+                    name: 'Toyota Fortuner', 
+                    description: 'White SUV',
+                    price: '₱3,500/day',
+                    type: 'SUV',
+                    transmission: 'Automatic',
+                    capacity: '7 passengers',
+                    fuel: 'Diesel',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Touchscreen', '4WD', 'Rear Camera', 'Spacious'],
+                    image: './fortuner.jpg'
+                },
+                { 
+                    id: 2, 
+                    name: 'Toyota Raize', 
+                    description: 'Compact SUV',
+                    price: '₱1,800/day',
+                    type: 'SUV',
+                    transmission: 'Automatic',
+                    capacity: '5 passengers',
+                    fuel: 'Gasoline',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Touchscreen', 'Fuel Efficient', 'Compact'],
+                    image: './raize.jpg'
+                },
+                { 
+                    id: 3, 
+                    name: 'Toyota Wigo', 
+                    description: 'Automatic',
+                    price: '₱1,300/day',
+                    type: 'Hatchback',
+                    transmission: 'Automatic',
+                    capacity: '5 passengers',
+                    fuel: 'Gasoline',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Fuel Efficient', 'Easy Parking', 'Compact'],
+                    image: './wigoash.jpg'
+                },
+                { 
+                    id: 4, 
+                    name: 'Toyota Wigo', 
+                    description: 'Manual',
+                    price: '₱1,200/day',
+                    type: 'Hatchback',
+                    transmission: 'Manual',
+                    capacity: '5 passengers',
+                    fuel: 'Gasoline',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Fuel Efficient', 'Easy Parking', 'Economical'],
+                    image: './wigodarkgray.jpg'
+                },
+                { 
+                    id: 5, 
+                    name: 'Mitsubishi Mirage G4', 
+                    description: 'Sedan',
+                    price: '₱1,400/day',
+                    type: 'Sedan',
+                    transmission: 'Automatic',
+                    capacity: '5 passengers',
+                    fuel: 'Gasoline',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Fuel Efficient', 'Spacious Trunk', 'Reliable'],
+                    image: './mirageg4.jpg'
+                },
+                { 
+                    id: 6, 
+                    name: 'Nissan Navarra', 
+                    description: '4x2 Pickup',
+                    price: '₱3,000/day',
+                    type: 'Pickup Truck',
+                    transmission: 'Automatic',
+                    capacity: '5 passengers',
+                    fuel: 'Diesel',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Tough', 'Spacious Cabin', 'Durable'],
+                    image: './pickup.jpg'
+                },
+                { 
+                    id: 7, 
+                    name: 'Ford Ranger Sports 4x4', 
+                    description: '2026 Model',
+                    price: '₱4,000/day',
+                    type: 'Pickup Truck',
+                    transmission: 'Automatic',
+                    capacity: '5 passengers',
+                    fuel: 'Diesel',
+                    features: ['AC', 'Power Steering', 'Airbags', '4x4', 'Premium Sound', 'Touchscreen', 'Rear Camera'],
+                    image: './rangersport.jpg'
+                },
+                { 
+                    id: 8, 
+                    name: 'Mitsubishi Expander', 
+                    description: 'MPV',
+                    price: '₱2,500/day',
+                    type: 'MPV',
+                    transmission: 'Automatic',
+                    capacity: '7 passengers',
+                    fuel: 'Gasoline',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Spacious', 'Family Friendly', 'Comfortable'],
+                    image: './pickup.jpg'
+                },
+                { 
+                    id: 9, 
+                    name: 'Toyota Innova', 
+                    description: 'MPV',
+                    price: '₱2,700/day',
+                    type: 'MPV',
+                    transmission: 'Automatic',
+                    capacity: '7 passengers',
+                    fuel: 'Diesel',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Spacious', 'Reliable', 'Comfortable'],
+                    image: './innova.jpg'
+                },
+                { 
+                    id: 10, 
+                    name: 'Toyota GL Grandia', 
+                    description: 'Manual Van',
+                    price: '₱3,200/day',
+                    type: 'Van',
+                    transmission: 'Manual',
+                    capacity: '10+ passengers',
+                    fuel: 'Diesel',
+                    features: ['AC', 'Power Steering', 'Spacious', 'Group Transport', 'Comfortable Seats'],
+                    image: './grandia.jpg'
+                },
+                { 
+                    id: 11, 
+                    name: 'Toyota Vios', 
+                    description: 'Automatic Red',
+                    price: '₱1,500/day',
+                    type: 'Sedan',
+                    transmission: 'Automatic',
+                    capacity: '5 passengers',
+                    fuel: 'Gasoline',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Fuel Efficient', 'Reliable', 'Comfortable'],
+                    image: './viosred.jpg'
+                },
+                { 
+                    id: 12, 
+                    name: 'Toyota Vios', 
+                    description: 'Automatic Gray',
+                    price: '₱1,500/day',
+                    type: 'Sedan',
+                    transmission: 'Automatic',
+                    capacity: '5 passengers',
+                    fuel: 'Gasoline',
+                    features: ['AC', 'Power Steering', 'Airbags', 'Fuel Efficient', 'Reliable', 'Comfortable'],
+                    image: './viosgray.jpg'
+                }
+            ],
+            selectedCar: null,
+            showBookingModal: false,
+            qrCodeUrl: null,
+            showBabySeatInfo: false,
+            bookingMessage: 'Hi, I\'m interested in renting a car from Raj Car Rental Palawan. Please provide availability and booking details.'
+         }"
+         x-init="
+            // Initialize with proper image loading
+            $nextTick(() => {
+                // Check if images are loading properly
+                const checkImage = (url) => {
+                    return new Promise((resolve) => {
+                        const img = new Image();
+                        img.onload = () => resolve(true);
+                        img.onerror = () => resolve(false);
+                        img.src = url;
+                    });
+                };
+                
+                // Verify carousel images
+                Promise.all(this.images.map(img => checkImage(img))).then(results => {
+                    if (results.some(result => !result)) {
+                        // Fallback to placeholder images if local images don't load
+                        this.images = [
+                            'https://images.unsplash.com/photo-1566479137141-0a5b4f4f9b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'https://images.unsplash.com/photo-1563720223485-8d6d7d6c81e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                        ];
+                    }
+                });
+            });
+            
+            // Auto-rotate carousel
+            setInterval(() => {
+                if (!this.showBookingModal) {
+                    this.currentImage = (this.currentImage + 1) % this.images.length;
+                }
+            }, 5000);
+         ">
+        
+        <!-- Main Card Container -->
+        <div class="max-w-6xl mx-auto">
+            <!-- Header with Logo -->
+            <div class="text-center mb-10">
+                <!-- Actual Logo -->
+                <div class="flex justify-center items-center mb-4">
+                    <img src="./logo.jpg" alt="Raj Car Rental Palawan Logo" class="logo-img rounded-lg shadow-lg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'; this.alt='Raj Car Rental Logo';">
+                </div>
+                
+                <h1 class="text-4xl md:text-5xl luxury-font font-bold text-gold mb-2" x-text="business.name"></h1>
+                <p class="text-lg text-dark-gray max-w-2xl mx-auto" x-text="business.tagline"></p>
+                
+                <!-- Business Credentials -->
+                <div class="flex flex-wrap justify-center gap-3 mt-4">
+                    <span class="px-3 py-1 bg-gold bg-opacity-10 text-gold text-xs font-medium rounded-full border border-gold border-opacity-30">
+                        <i class="fas fa-file-contract mr-1"></i>
+                        <span x-text="business.dtiPermit"></span>
+                    </span>
+                    <span class="px-3 py-1 bg-gold bg-opacity-10 text-gold text-xs font-medium rounded-full border border-gold border-opacity-30">
+                        <i class="fas fa-building mr-1"></i>
+                        <span x-text="business.birRegistered"></span>
+                    </span>
+                    <span class="px-3 py-1 bg-gold bg-opacity-10 text-gold text-xs font-medium rounded-full border border-gold border-opacity-30">
+                        <i class="fas fa-id-card mr-1"></i>
+                        <span x-text="business.businessPermit"></span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Main Card -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                <!-- Carousel Section -->
+                <div class="relative">
+                    <div class="carousel-container overflow-hidden">
+                        <template x-for="(image, index) in images" :key="index">
+                            <img :src="image" 
+                                 alt="Raj Car Rental Fleet" 
+                                 class="w-full h-64 md:h-80 object-cover"
+                                 :class="{ 'hidden': index !== currentImage }"
+                                 x-transition:enter="transition ease-out duration-300"
+                                 x-transition:enter-start="opacity-0"
+                                 x-transition:enter-end="opacity-100"
+                                 @error="imageError($event, index)">
+                        </template>
+                        
+                        <!-- Dots Indicator -->
+                        <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                            <template x-for="(image, index) in images" :key="index">
+                                <div class="carousel-dot" 
+                                     :class="{ 'active': index === currentImage }"
+                                     @click="currentImage = index">
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact & Social Section -->
+                <div class="p-6 md:p-8">
+                    <!-- Social Links -->
+                    <div class="flex justify-center space-x-4 mb-8">
+                        <a :href="business.whatsapp" target="_blank" 
+                           class="icon-circle bg-green-100 hover:bg-green-500 group">
+                            <i class="fab fa-whatsapp text-green-600 group-hover:text-white text-lg"></i>
+                        </a>
+                        <a :href="business.facebook" target="_blank" 
+                           class="icon-circle bg-blue-100 hover:bg-blue-500 group">
+                            <i class="fab fa-facebook-f text-blue-600 group-hover:text-white"></i>
+                        </a>
+                        <a :href="business.instagram" target="_blank" 
+                           class="icon-circle bg-pink-100 hover:bg-pink-500 group">
+                            <i class="fab fa-instagram text-pink-600 group-hover:text-white"></i>
+                        </a>
+                        <a :href="'tel:' + business.phone.replace(/\s/g, '')" 
+                           class="icon-circle bg-purple-100 hover:bg-purple-500 group">
+                            <i class="fas fa-phone text-purple-600 group-hover:text-white"></i>
+                        </a>
+                        <a :href="'mailto:' + business.email" 
+                           class="icon-circle bg-red-100 hover:bg-red-500 group">
+                            <i class="fas fa-envelope text-red-600 group-hover:text-white"></i>
+                        </a>
+                    </div>
+
+                    <!-- Contact Info Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+                        <div class="flex items-start space-x-3 p-4 bg-luxury-beige rounded-xl">
+                            <i class="fas fa-map-marker-alt text-gold mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-dark-gray">Address</p>
+                                <p class="text-gray-700" x-text="business.address"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-4 bg-luxury-beige rounded-xl">
+                            <i class="fas fa-phone text-gold mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-dark-gray">Phone / WhatsApp</p>
+                                <p class="text-gray-700 font-medium" x-text="business.phone"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-4 bg-luxury-beige rounded-xl">
+                            <i class="fas fa-envelope text-gold mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-dark-gray">Email</p>
+                                <p class="text-gray-700" x-text="business.email"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-4 bg-luxury-beige rounded-xl">
+                            <i class="fas fa-clock text-gold mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-dark-gray">Operating Hours</p>
+                                <p class="text-gray-700" x-text="business.officeHours"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-4 bg-luxury-beige rounded-xl">
+                            <i class="fas fa-shield-alt text-gold mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-dark-gray">Insurance</p>
+                                <p class="text-gray-700">Comprehensive Insurance Coverage</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-4 bg-luxury-beige rounded-xl">
+                            <i class="fas fa-car text-gold mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-dark-gray">Fleet Size</p>
+                                <p class="text-gray-700">14 Rental Units Available</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Baby Car Seat Feature -->
+                    <div class="baby-seat-card rounded-xl p-6 mb-10 shadow-md">
+                        <div class="flex flex-col md:flex-row items-start md:items-center">
+                            <div class="md:w-1/3 mb-4 md:mb-0 md:mr-6">
+                                <img src="./babycarseat.jpg" alt="Nyssa Apruva Baby Car Seat" 
+                                     class="w-full rounded-lg shadow-md car-image"
+                                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'; this.alt='Baby Car Seat';">
+                            </div>
+                            <div class="md:w-2/3">
+                                <div class="flex items-center mb-3">
+                                    <div class="w-12 h-12 rounded-full bg-gold bg-opacity-20 flex items-center justify-center mr-3">
+                                        <i class="fas fa-baby-carriage text-gold text-xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-dark-gray">BABY CAR SEATS</h3>
+                                </div>
+                                <p class="text-gray-700 italic mb-2">"because we care for your little ones"</p>
+                                <p class="text-lg font-semibold text-gold mb-3">Nyssa Apruva Baby Car Seat</p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-4">
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-check-circle text-gold mr-2"></i>
+                                        <span>3 position reclining seats</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-check-circle text-gold mr-2"></i>
+                                        <span>Rear Facing Group 0+ (less 13kg)</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-check-circle text-gold mr-2"></i>
+                                        <span>5 points harness</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-check-circle text-gold mr-2"></i>
+                                        <span>Seat cover included</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-check-circle text-gold mr-2"></i>
+                                        <span>Top belt guide hook for additional safety</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-check-circle text-gold mr-2"></i>
+                                        <span>Shoulder strap harness adjuster strap</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-check-circle text-gold mr-2"></i>
+                                        <span>ICC sticker approved</span>
+                                    </div>
+                                </div>
+                                
+                                <p class="font-bold text-lg text-dark-gray">
+                                    <span class="text-gold">👶🚗</span> Baby car seats <span class="text-gold font-bold">FREE</span> with every rental at
+                                    <span class="text-gold">Raj Car Rental</span> – safe, easy, and family-friendly
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Available Cars -->
+                    <div class="mb-12">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl luxury-font font-bold text-dark-gray">Available Cars & Rates</h3>
+                            <div class="text-sm text-gray-500">
+                                <span class="font-medium text-gold" x-text="availableCars.length"></span> Units Available
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <template x-for="car in availableCars" :key="car.id">
+                                <div class="card-hover bg-white rounded-xl p-5 shadow-md">
+                                    <div class="mb-4">
+                                        <!-- Car Image -->
+                                        <div class="mb-4">
+                                            <img :src="car.image" :alt="car.name" 
+                                                 class="car-image"
+                                                 @error="carImageError($event, car)">
+                                        </div>
+                                        
+                                        <div class="flex justify-between items-start mb-2">
+                                            <div>
+                                                <h4 class="font-bold text-lg text-dark-gray" x-text="car.name"></h4>
+                                                <p class="text-sm text-gray-500" x-text="car.description"></p>
+                                            </div>
+                                            <span class="font-bold text-gold text-xl" x-text="car.price"></span>
+                                        </div>
+                                        
+                                        <div class="space-y-2 mb-4">
+                                            <div class="flex items-center text-sm text-gray-600">
+                                                <i class="fas fa-cog mr-2 text-gold"></i>
+                                                <span x-text="car.transmission"></span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-600">
+                                                <i class="fas fa-users mr-2 text-gold"></i>
+                                                <span x-text="car.capacity"></span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-600">
+                                                <i class="fas fa-gas-pump mr-2 text-gold"></i>
+                                                <span x-text="car.fuel"></span>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex flex-wrap gap-1 mb-5">
+                                            <template x-for="feature in car.features.slice(0, 3)" :key="feature">
+                                                <span class="px-2 py-1 bg-gold bg-opacity-10 text-gold text-xs rounded-full font-medium">
+                                                    <span x-text="feature"></span>
+                                                </span>
+                                            </template>
+                                            <span x-show="car.features.length > 3" 
+                                                  class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full font-medium">
+                                                +<span x-text="car.features.length - 3"></span> more
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <button class="btn-primary font-medium py-2.5 px-3 rounded-lg flex items-center justify-center space-x-2 text-sm"
+                                                @click="openBookingModal(car, 'whatsapp')">
+                                            <i class="fab fa-whatsapp"></i>
+                                            <span>Book via WhatsApp</span>
+                                        </button>
+                                        
+                                        <button class="btn-secondary font-medium py-2.5 px-3 rounded-lg flex items-center justify-center space-x-2 text-sm"
+                                                @click="openBookingModal(car, 'sms')">
+                                            <i class="fas fa-sms"></i>
+                                            <span>Book via SMS</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Map Section -->
+                    <div class="mb-10">
+                        <h3 class="text-2xl luxury-font font-bold text-dark-gray mb-6">Our Location in Puerto Princesa</h3>
+                        <div class="rounded-xl overflow-hidden shadow-lg border border-gray-200">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125698.64083575011!2d118.70836975504868!3d9.779766004240422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33b56c57b0e44d2b%3A0xd222ec6f83c6c21c!2sPuerto%20Princesa%2C%20Palawan!5e0!3m2!1sen!2sph!4v1647856781231!5m2!1sen!2sph" 
+                                    width="100%" 
+                                    height="300" 
+                                    style="border:0;" 
+                                    allowfullscreen="" 
+                                    loading="lazy">
+                            </iframe>
+                        </div>
+                        <p class="text-center text-gray-600 mt-3">
+                            <i class="fas fa-map-marker-alt text-gold mr-1"></i>
+                            <span x-text="business.address"></span>
+                        </p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+                        <button class="btn-primary font-bold py-4 px-6 rounded-xl flex items-center justify-center space-x-3 text-lg"
+                                @click="window.open(business.facebook, '_blank')">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                            <span>Visit Facebook Page</span>
+                        </button>
+                        
+                        <button class="bg-dark-gray hover:bg-gray-800 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center space-x-3 text-lg transition-all duration-300"
+                                @click="shareLink()">
+                            <i class="fas fa-share-alt text-xl"></i>
+                            <span>Share This Page</span>
+                        </button>
+                        
+                        <button class="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center space-x-3 text-lg transition-all duration-300"
+                                @click="generateQrCode()">
+                            <i class="fas fa-qrcode text-xl"></i>
+                            <span>Get QR Code</span>
+                        </button>
+                    </div>
+
+                    <!-- QR Code Display -->
+                    <div class="text-center" x-show="qrCodeUrl">
+                        <h3 class="text-xl font-bold mb-4 text-dark-gray">Scan to Save Our Contact</h3>
+                        <img :src="qrCodeUrl" 
+                             alt="Raj Car Rental QR Code" 
+                             class="mx-auto rounded-xl border-4 border-white shadow-xl max-w-xs">
+                        <p class="text-gray-600 mt-3 text-sm">Scan this QR code to save our contact information on your phone</p>
+                    </div>
+                </div>
+                
+                <!-- Footer -->
+                <div class="bg-dark-gray text-white p-6 rounded-b-2xl">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="mb-4 md:mb-0 flex items-center">
+                            <img src="./logo.jpg" alt="Raj Car Rental Palawan Logo" 
+                                 class="h-10 w-auto mr-3 rounded"
+                                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80'; this.alt='Raj Car Rental Logo';">
+                            <div>
+                                <h4 class="luxury-font text-xl font-bold text-gold mb-1">Raj Car Rental Palawan</h4>
+                                <p class="text-gray-300 text-sm">Premium Car Rental Services Since 2010</p>
+                            </div>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <p class="text-gray-300 text-sm mb-1">
+                                <i class="fas fa-certificate text-gold mr-1"></i>
+                                DTI Registered • BIR Registered • Business Permit
+                            </p>
+                            <p class="text-gray-300 text-sm">
+                                <i class="fas fa-phone-alt text-gold mr-1"></i>
+                                <span x-text="business.phone"></span> • 
+                                <i class="fas fa-envelope text-gold mr-1 ml-2"></i>
+                                <span x-text="business.email"></span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-700 mt-4 pt-4 text-center">
+                        <p class="text-gray-400 text-xs">© 2024 Raj Car Rental Palawan. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Modal -->
+        <div x-show="showBookingModal" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay"
+             @click.self="showBookingModal = false">
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6"
+                 @click.stop>
+                <div class="flex justify-between items-center mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-dark-gray" x-text="selectedCar ? selectedCar.name : ''"></h3>
+                        <p class="text-gold font-bold" x-text="selectedCar ? selectedCar.price : ''"></p>
+                    </div>
+                    <button @click="showBookingModal = false"
+                            class="text-gray-400 hover:text-gray-600 text-2xl">
+                        &times;
+                    </button>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Booking Message (You can edit this):
+                    </label>
+                    <textarea 
+                        x-model="bookingMessage"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-gold"
+                        rows="4"
+                        placeholder="Type your booking message here..."></textarea>
+                    
+                    <div class="bg-luxury-beige p-4 rounded-lg mt-4">
+                        <p class="text-sm text-gray-600">
+                            <i class="fas fa-info-circle text-gold mr-1"></i>
+                            We'll respond within 1 hour to confirm your booking. Please include your preferred dates.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="space-y-3">
+                    <p class="text-sm font-medium text-dark-gray mb-2">Choose booking method:</p>
+                    
+                    <button @click="bookViaWhatsApp()"
+                            class="w-full whatsapp-gradient text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center space-x-3 transition-all duration-300 hover:shadow-lg">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        <span class="text-lg">Book via WhatsApp</span>
+                    </button>
+                    
+                    <button @click="bookViaSMS()"
+                            class="w-full sms-gradient text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center space-x-3 transition-all duration-300 hover:shadow-lg">
+                        <i class="fas fa-sms text-2xl"></i>
+                        <span class="text-lg">Book via SMS</span>
+                    </button>
+                    
+                    <button @click="showBookingModal = false"
+                            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-xl transition-all duration-300 mt-2">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Share Functionality
+        function shareLink() {
+            const link = window.location.href;
+            const businessName = "Raj Car Rental Palawan";
+            const shareText = `Check out ${businessName} for premium car rentals in Puerto Princesa! 14 units available including Toyota Fortuner, Ford Ranger Sports 4x4, and more. Baby car seats FREE with every rental! Visit our Facebook page: ${this.business.facebook}`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: businessName,
+                    text: shareText,
+                    url: link,
+                })
+                .then(() => console.log('Shared successfully'))
+                .catch((error) => console.error('Error sharing:', error));
+            } else {
+                navigator.clipboard.writeText(`${link}\n\n${shareText}`).then(() => {
+                    alert('Link and business information copied to clipboard! Share it with your friends.');
+                });
+            }
+        }
+
+        // Generate QR Code
+        function generateQrCode() {
+            const link = window.location.href;
+            const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(link)}&format=svg&color=2B2B2B&bgcolor=FAFAF7&margin=10`;
+            this.qrCodeUrl = qrCodeUrl;
+            
+            // Smooth scroll to QR code
+            setTimeout(() => {
+                const qrElement = document.querySelector('[x-show="qrCodeUrl"]');
+                if (qrElement) {
+                    qrElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }, 100);
+        }
+
+        // Open Booking Modal
+        function openBookingModal(car, method) {
+            this.selectedCar = car;
+            
+            // Default booking message
+            this.bookingMessage = `Hi Raj Car Rental! I'm interested in renting the ${car.name} (${car.description}) for ${car.price}. Please let me know about availability for my trip to Palawan. I would also like to request the FREE baby car seat if available.`;
+            
+            this.showBookingModal = true;
+        }
+
+        // Book via WhatsApp
+        function bookViaWhatsApp() {
+            const car = this.selectedCar;
+            const business = this.business;
+            const message = this.bookingMessage || 
+                `Hi Raj Car Rental! I'm interested in renting the ${car.name} (${car.description}) for ${car.price}. Please provide availability and booking details. I would also like to request the FREE baby car seat if available.`;
+            
+            // Extract phone number from WhatsApp link
+            const phoneNumber = business.whatsapp.split('/').pop();
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+            this.showBookingModal = false;
+        }
+
+        // Book via SMS
+        function bookViaSMS() {
+            const car = this.selectedCar;
+            const business = this.business;
+            const message = this.bookingMessage || 
+                `Hi Raj Car Rental! I'm interested in renting the ${car.name} (${car.description}) for ${car.price}. Please provide availability and booking details. I would also like to request the FREE baby car seat if available.`;
+            
+            const phoneNumber = business.phone.replace(/\s/g, '');
+            const smsUrl = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+            
+            window.location.href = smsUrl;
+            this.showBookingModal = false;
+        }
+
+        // Image error handling for carousel
+        function imageError(event, index) {
+            const fallbackImages = [
+                'https://images.unsplash.com/photo-1566479137141-0a5b4f4f9b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1563720223485-8d6d7d6c81e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            ];
+            
+            if (index < fallbackImages.length) {
+                event.target.src = fallbackImages[index];
+            }
+        }
+
+        // Image error handling for car images
+        function carImageError(event, car) {
+            const carName = car.name.toLowerCase();
+            let fallbackUrl = 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            
+            if (carName.includes('fortuner')) {
+                fallbackUrl = 'https://images.unsplash.com/photo-1566479137141-0a5b4f4f9b7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            } else if (carName.includes('ranger')) {
+                fallbackUrl = 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            } else if (carName.includes('grandia')) {
+                fallbackUrl = 'https://images.unsplash.com/photo-1563720223485-8d6d7d6c81e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            } else if (carName.includes('innova')) {
+                fallbackUrl = 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            } else if (carName.includes('pickup')) {
+                fallbackUrl = 'https://images.unsplash.com/photo-1556189250-72ba954cfc2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            } else if (carName.includes('vios')) {
+                fallbackUrl = 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            } else if (carName.includes('wigo')) {
+                fallbackUrl = 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            } else if (carName.includes('raize')) {
+                fallbackUrl = 'https://images.unsplash.com/photo-1631795582635-9ef5431e0aa4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            }
+            
+            event.target.src = fallbackUrl;
+        }
+
+        // Initialize Alpine data
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('carRentalData', () => ({
+                // Data will be initialized via x-data attribute
+            }));
+        });
+
+        // Add carousel keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const alpineData = Alpine.$data(document.querySelector('[x-data]'));
+            
+            if (!alpineData || alpineData.showBookingModal) return;
+            
+            if (e.key === 'ArrowLeft') {
+                alpineData.currentImage = 
+                    (alpineData.currentImage - 1 + alpineData.images.length) % alpineData.images.length;
+            } else if (e.key === 'ArrowRight') {
+                alpineData.currentImage = 
+                    (alpineData.currentImage + 1) % alpineData.images.length;
+            }
+        });
+
+        // Check for missing image files and provide visual feedback
+        document.addEventListener('DOMContentLoaded', function() {
+            const imagesToCheck = [
+                './fortuner.jpg', './rangersport.jpg', './grandia.jpg', './innova.jpg',
+                './babycarseat.jpg', './logo.jpg', './mirageg4.jpg', './pickup.jpg',
+                './raize.jpg', './viosgray.jpg', './viosred.jpg', './wigoash.jpg',
+                './wigodarkgray.jpg'
+            ];
+            
+            imagesToCheck.forEach(imgSrc => {
+                const img = new Image();
+                img.onerror = function() {
+                    console.warn(`Image not found: ${imgSrc}`);
+                };
+                img.src = imgSrc;
+            });
+        });
+    </script>
+</body>
+</html>
